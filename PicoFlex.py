@@ -1313,8 +1313,9 @@ class PicoFlex (PyTango.Device_4Impl):
         self.debug_stream("In socket_write_and_read()")
         self.set_status("Reading/writing socket")
         
-        resp_ok = 'ACK'
-        resp_not_ok = 'NAK'
+        resp_ack = 'ACK'
+        resp_nak = 'NAK'
+        resp_error = 0
 
         argin = str(argin) 
         picocommand = argin.rstrip('\r\n')+'\r\n'
@@ -1336,22 +1337,22 @@ class PicoFlex (PyTango.Device_4Impl):
                             read_data = self.s.recv(1024)                                
                             reply += read_data 
                             self.debug_stream("Data received: " + reply.rstrip('\r\n'))                                                                                                                                                                                                                                                  
-                if len(reply) == 0:
+                if len(reply) == resp_error:
                     self.status_string = "Cmd " + picocommand + " failed, no reply"
                     self.debug_stream("Command " + picocommand + " failed")
                     return 0 
-                elif reply.startswith(resp_ok):
+                elif reply.startswith(resp_ack):
                     self.status_string = "Cmd "+picocommand+" acknowledged"
                     self.debug_stream("Command " + picocommand + " acknowledged")
                     return 1
-                elif reply.startswith(resp_not_ok):
+                elif reply.startswith(resp_nak):
                     self.status_string = "Cmd "+picocommand+" NOT acknowledged"
                     self.debug_stream("Command " + picocommand + " NOT acknowledged")
                     return 2
                 elif reply.startswith(argin[:-1]):
                     reply = reply[len(argin)-1:]                    
                     self.status_string = "Cmd "+argin+" Successful"
-                    self.debug_stream("returns stripped reply: %s" % reply.rstrip('\r\n'))
+                    self.debug_stream("Returned stripped reply: %s" % reply.rstrip('\r\n'))
                     return reply   
                 else:
                     if reply.startswith("PicoFlex_MainBoard"):
