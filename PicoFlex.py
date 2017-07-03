@@ -166,7 +166,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch1rng()')            
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -176,7 +176,8 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch1rng()')        
         else:
-            self.debug_stream("Reply to query is " + str(resp))
+            self.set_state(PyTango.DevState.ON)
+            self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch1rng_read = int(resp)                   
             attr.set_value(self.attr_ch1rng_read)
         
@@ -201,7 +202,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_ch1rng()')            
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -228,7 +229,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch2rng()')              
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -238,6 +239,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch2rng()')        
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch2rng_read = int(resp)                           
             attr.set_value(self.attr_ch2rng_read)
@@ -265,7 +267,7 @@ class PicoFlex (PyTango.Device_4Impl):
                                            'No reply from device',
                                            'write_ch2rng()')                
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -291,7 +293,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("No reply from PicoFlex, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch1ri()') 
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -301,6 +303,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch1ri()')
         else:
+            self.set_state(PyTango.DevState.ON)            
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch1ri_read = float(resp)                   
             attr.set_value(self.attr_ch1ri_read)
@@ -322,7 +325,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch1rb()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -332,6 +335,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch1rb()')        
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch1rb_read = float(resp)                               
             attr.set_value(self.attr_ch1rb_read)
@@ -353,7 +357,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch1dac()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -363,6 +367,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch1dac()')        
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch1dac_read = str(resp)                               
             attr.set_value(self.attr_ch1dac_read)
@@ -392,7 +397,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_ch1dac()')     
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -420,7 +425,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("No reply from PicoFlex, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch2ri()')  
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -430,7 +435,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch2ri()')    
         else:
-            # PicoFlex returns a value
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch2ri_read = float(resp)                   
             attr.set_value(self.attr_ch2ri_read)
@@ -452,7 +457,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch2rb()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -462,6 +467,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch2rb()')        
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch2rb_read = float(resp)                               
             attr.set_value(self.attr_ch2rb_read)
@@ -483,7 +489,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_ch2dac()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -493,6 +499,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_ch2dac()')        
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch2dac_read = str(resp)                               
             attr.set_value(self.attr_ch2dac_read)
@@ -522,7 +529,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_ch2dac()') 
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -551,7 +558,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_dacsv()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -561,6 +568,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_dacsv()')        
         else:        
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_dacsv_read = float(resp)
             attr.set_value(self.attr_dacsv_read)
@@ -585,7 +593,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_dacsv()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -614,7 +622,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_dacsb()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -624,6 +632,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_dacsb()')        
         else:     
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_dacsb_read = int(resp)            
             attr.set_value(self.attr_dacsb_read)
@@ -649,7 +658,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_dacsb()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -678,7 +687,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_disp()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -708,7 +717,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_picoBoardDescr()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -718,6 +727,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoBoardDescr()')        
         else:          
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoBoardDescr_read = str(resp)                
             attr.set_value(self.attr_picoBoardDescr_read)            
@@ -743,7 +753,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_picoMainBoardCode()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -753,6 +763,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoMainBoardCode()')
         else:          
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoMainBoardCode_read = str(resp)                
             attr.set_value(self.attr_picoMainBoardCode_read)
@@ -778,7 +789,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_picoBoardCalDate()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -788,6 +799,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoBoardCalDate()')      
         else:        
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoBoardCalDate_read = str(resp)                                    
             attr.set_value(self.attr_picoBoardCalDate_read)        
@@ -813,7 +825,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_picoBoardProdDate()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -822,7 +834,8 @@ class PicoFlex (PyTango.Device_4Impl):
             self.set_status("Request NOT ACKOWLEDGED !")             
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoBoardProdDate()')        
-        else:     
+        else:    
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoBoardProdDate_read = str(resp)                
             attr.set_value(self.attr_picoBoardProdDate_read)
@@ -848,7 +861,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_picoBoardSerialNo()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -857,7 +870,8 @@ class PicoFlex (PyTango.Device_4Impl):
             self.set_status("Request NOT ACKOWLEDGED !")             
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoBoardSerialNo()')        
-        else:            
+        else:    
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoBoardSerialNo_read = str(resp)                
             attr.set_value(self.attr_picoBoardSerialNo_read)
@@ -883,7 +897,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_picoSysStatus()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -893,6 +907,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoSysStatus()')         
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoSysStatus_read = str(resp)            
             attr.set_value(self.attr_picoSysStatus_read)
@@ -928,7 +943,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_picoSysStatus()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -956,7 +971,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_picoMainFwVer()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -966,6 +981,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoMainFwVer()')
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoMainFwVer_read = str(resp)
             attr.set_value(self.attr_picoMainFwVer_read)
@@ -988,7 +1004,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_picoBoardInfo()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -998,6 +1014,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoBoardInfo()')        
         else:  
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoBoardInfo_read = str(resp)
             attr.set_value(self.attr_picoBoardInfo_read)                
@@ -1019,7 +1036,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_picoModuleFwVer()') 
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -1029,6 +1046,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoModuleFwVer()') 
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoModuleFwVer_read = str(resp)
             attr.set_value(self.attr_picoMainFwVer_read)
@@ -1052,7 +1070,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_signalSum()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -1062,6 +1080,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_signalSum()') 
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch1ri_read = float(resp)                   
             attr.set_value(self.attr_ch1ri_read)
@@ -1076,7 +1095,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_signalSum()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -1086,6 +1105,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_signalSum()')
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch2ri_read = float(resp)                   
             attr.set_value(self.attr_ch2ri_read)                        
@@ -1112,7 +1132,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_signalDiff()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -1122,6 +1142,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_signalDiff()')  
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch1ri_read = float(resp)                   
             attr.set_value(self.attr_ch1ri_read)
@@ -1136,7 +1157,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','read_signalDiff()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -1146,6 +1167,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_signalDiff()')       
         else:
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_ch2ri_read = float(resp)                   
             attr.set_value(self.attr_ch2ri_read)         
@@ -1201,7 +1223,7 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','write_picoBoardDescr()')             
         elif resp == resp_ack:
-            # PicoFlex accepts the configuration command
+            self.set_state(PyTango.DevState.ON)
             self.set_status("Request acknowledged")             
             self.debug_stream("Request acknowledged")
         elif resp == resp_nak:
@@ -1210,7 +1232,8 @@ class PicoFlex (PyTango.Device_4Impl):
             self.set_status("Request NOT ACKOWLEDGED !")             
             self.debug_stream("Request NOT ACKOWLEDGED !")
             PyTango.Except.throw_exception('Communication Error','Request not acknowledged','read_picoModuleBoardCode()')         
-        else:          
+        else:   
+            self.set_state(PyTango.DevState.ON)
             self.debug_stream("Reply to query is " + str(resp).rstrip('\r\n'))
             self.attr_picoModuleBoardCode_read = str(resp)                     
             attr.set_value(self.attr_picoModuleBoardCode_read)
@@ -1245,7 +1268,11 @@ class PicoFlex (PyTango.Device_4Impl):
         """
         self.debug_stream("In reset()")
         #----- PROTECTED REGION ID(PicoFlex.reset) ENABLED START -----#
-        self.set_status("Reading/writing data")
+        self.set_status("Resetting PicoFlex...")
+        
+        if PyTango.DevState.ON: 
+            PyTango.DevState.OFF
+        
         cmd_str = "*RST"
         resp_err = 0
         resp_ack = 1
@@ -1259,8 +1286,8 @@ class PicoFlex (PyTango.Device_4Impl):
             self.debug_stream("Incorrect request, check socket status !")
             PyTango.Except.throw_exception('Communication Error','No reply from device','reset()') 
         elif resp == resp_ack:
-            # PicoFlex accepts the Reset command
-            self.set_status("PicoFLEX reboots")             
+            self.set_state(PyTango.DevState.ON)
+            self.set_status("PicoFLEX reboots...")             
             self.debug_stream("Reset command accepted...PicoFLEX reboots...")            
         elif resp == resp_nak:
             # PicoFlex does not accept the command/query. No attributes are updated
